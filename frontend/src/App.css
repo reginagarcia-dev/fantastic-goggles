@@ -1,4 +1,13 @@
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   font-family: "Inter", system-ui, sans-serif;
@@ -15,7 +24,31 @@ body {
   max-width: 540px;
 }
 
-header { margin-bottom: 2rem; }
+header {
+  margin-bottom: 2rem;
+}
+
+.top-links {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.top-links a,
+.link-button {
+  color: #8b91a9;
+  background: transparent;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.top-links a:hover,
+.link-button:hover {
+  color: #e8eaf0;
+}
 
 h1 {
   font-size: 1.75rem;
@@ -36,6 +69,13 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
 .add-form input {
   flex: 1;
   padding: 0.6rem 0.875rem;
@@ -48,7 +88,24 @@ h1 {
   transition: border-color 0.15s;
 }
 
-.add-form input:focus { border-color: #6366f1; }
+.auth-form input {
+  padding: 0.6rem 0.875rem;
+  border-radius: 8px;
+  border: 1px solid #2a2d3a;
+  background: #1a1d27;
+  color: #e8eaf0;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.add-form input:focus {
+  border-color: #6366f1;
+}
+
+.auth-form input:focus {
+  border-color: #6366f1;
+}
 
 .add-form button {
   padding: 0.6rem 1.1rem;
@@ -62,7 +119,30 @@ h1 {
   transition: background 0.15s;
 }
 
-.add-form button:hover { background: #4f46e5; }
+.auth-form button {
+  padding: 0.6rem 1.1rem;
+  border-radius: 8px;
+  border: none;
+  background: #6366f1;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.add-form button:hover {
+  background: #4f46e5;
+}
+
+.auth-form button:hover {
+  background: #4f46e5;
+}
+
+.auth-form button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
 
 .task-list {
   list-style: none;
@@ -82,11 +162,16 @@ h1 {
   transition: opacity 0.2s;
 }
 
-.task-list li.done { opacity: 0.5; }
-.task-list li.done .title { text-decoration: line-through; }
+.task-list li.done {
+  opacity: 0.5;
+}
+.task-list li.done .title {
+  text-decoration: line-through;
+}
 
 .check {
-  width: 28px; height: 28px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   border: 2px solid #6366f1;
   background: transparent;
@@ -94,13 +179,23 @@ h1 {
   font-size: 0.85rem;
   cursor: pointer;
   flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.15s, color 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 
-.check:hover { background: #6366f1; color: #fff; }
+.check:hover {
+  background: #6366f1;
+  color: #fff;
+}
 
-.title { flex: 1; font-size: 0.9rem; }
+.title {
+  flex: 1;
+  font-size: 0.9rem;
+}
 
 .del {
   background: transparent;
@@ -112,7 +207,18 @@ h1 {
   transition: color 0.15s;
 }
 
-.del:hover { color: #ef4444; }
+.del:hover {
+  color: #ef4444;
+}
 
-.error { color: #ef4444; font-size: 0.875rem; margin-bottom: 1rem; }
-.hint  { color: #6b7280; font-size: 0.875rem; text-align: center; margin-top: 2rem; }
+.error {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+.hint {
+  color: #6b7280;
+  font-size: 0.875rem;
+  text-align: center;
+  margin-top: 2rem;
+}
