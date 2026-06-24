@@ -1,6 +1,4 @@
-# Interview Prep — Full-Stack Mock Repo
-
-A minimal React + Node task app that mirrors what you'll likely encounter in the interview.
+# Fantastic Goggles
 
 ## Stack
 - **Frontend** — React 18 + Vite (port 5173)
