@@ -10,7 +10,7 @@ router.post("/register", async (req, res) => {
 
     // Check if email already exists
     const emailCheck = await pool.query(
-      "SELECT * FROM users WHERE email = $1",
+      "SELECT 1 FROM users WHERE email = $1",
       [email],
     );
     if (emailCheck.rows.length > 0) {
@@ -21,7 +21,7 @@ router.post("/register", async (req, res) => {
     const user = { email, password: hashedPassword };
 
     const result = await pool.query(
-      "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *",
+      "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id, email, created_at",
       [user.email, user.password],
     );
     const token = jwt.sign(
@@ -30,7 +30,7 @@ router.post("/register", async (req, res) => {
       { expiresIn: "1h" },
     );
 
-    res.json({ user: result.rows[0], token });
+    res.json({ email: user.email, token });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -40,7 +40,7 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const userResult = await pool.query(
-      "SELECT * FROM users WHERE email = $1",
+      "SELECT id, email, password, created_at FROM users WHERE email = $1",
       [email],
     );
     if (userResult.rows.length === 0) {
@@ -56,7 +56,14 @@ router.post("/login", async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1h" },
     );
-    res.json({ user, token });
+    res.json({
+      user: {
+        id: user.id,
+        email: user.email,
+        created_at: user.created_at,
+      },
+      token,
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
